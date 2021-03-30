@@ -1,5 +1,7 @@
 FROM php:7-fpm AS goeleven
 
+LABEL org.opencontainers.image.source = "https://github.com/ghalse/docker-goeleven"
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends opensc softhsm2 libsofthsm2 libengine-pkcs11-openssl p11-kit gettext golang-go libltdl-dev \
     && rm -rf /var/lib/apt/lists/*
