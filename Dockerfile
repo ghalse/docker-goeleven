@@ -21,6 +21,7 @@ COPY softhsm2.conf /opt/goeleven
 COPY openssl.cnf.tmpl /opt/goeleven
 COPY entrypoint.sh /
 
+VOLUME /softhsm
 EXPOSE 8080/tcp
 
 ENTRYPOINT /entrypoint.sh
