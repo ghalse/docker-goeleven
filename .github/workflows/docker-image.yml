@@ -3,17 +3,16 @@ name: Docker Image CI
 on:
   push:
     branches: [ main ]
+  release:
+    types: [published]
 
 jobs:
-
-  build:
-
+  push_to_registry:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Push to Docker Hub
+      - name: Push to GitHub Packages
         uses: docker/build-push-action@v2
         with:
           username: ${{ github.actor }}
