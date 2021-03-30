@@ -1,0 +1,31 @@
+openssl_conf = openssl_init
+
+[openssl_init]
+engines = engine_section
+
+[ req ]
+default_bits = ${GOELEVEN_KEY_BITS}
+default_md = sha256
+string_mask = utf8only
+x509_extensions = v3_ca
+prompt = no
+distinguished_name = req_distinguished_name
+
+[ req_distinguished_name ]
+countryName = ZA
+commonName = ${GOELEVEN_LABEL}
+
+[ v3_ca ]
+subjectKeyIdentifier=hash
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+authorityKeyIdentifier=keyid:always,issuer
+issuerAltName=issuer:copy
+basicConstraints = critical,CA:false
+
+[engine_section]
+pkcs11 = pkcs11_section
+
+[pkcs11_section]
+dynamic_path = /usr/lib/${ARCH}-linux-gnu/engines-1.1/pkcs11.so
+MODULE_PATH = ${GOELEVEN_HSMLIB}
+init = ${GOELEVEN_SLOT}
